@@ -33,7 +33,7 @@ jobs:
       - uses: actions/checkout@v6
       - name: Prepare environment variables
         run: |
-          PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | tr '-' '_')
+          PACKAGE_NAME=$(yq --unwrapScalar .project.name pyproject.toml | tr '-' '_')
           echo "PACKAGE_NAME=${PACKAGE_NAME}" >> "${GITHUB_ENV}"
           if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
             echo "VERSION=${GITHUB_REF_NAME}" >> "${GITHUB_ENV}"
@@ -80,7 +80,6 @@ jobs:
           name: source
       - name: Prepare directory structure
         run: |
-          PACKAGE_NAME=$(echo "${{ github.event.repository.name }}" | tr '-' '_')
           mkdir -p dist
-          mv ${PACKAGE_NAME}-*.tar.gz dist/
+          mv *.tar.gz dist/
       - uses: pypa/gh-action-pypi-publish@release/v1
