@@ -54,6 +54,6 @@ fi
 
 if [ "${RELEASE_TAG:-yes}" = "yes" ]; then
   echo "Tag"
-  git tag -a -m "OpenArm KER ${version}" "${version}"
+  git tag -a -m "dora-openarm-quitter ${version}" "${version}"
   git push origin "${version}"
 fi
