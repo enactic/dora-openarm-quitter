@@ -25,9 +25,16 @@ fi
 version="$1"
 
 base_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
-repository_name="dora-openarm-quitter"
 
 cd "${base_dir}"
+
+repository_name=$(basename "$(
+  python3 <<PY
+import tomllib
+with open("pyproject.toml", "rb") as f:
+  print(tomllib.load(f)["project"]["urls"]["Repository"])
+PY
+)")
 
 if [ "${RELEASE_CHECK_ORIGIN:-yes}" = "yes" ]; then
   git_origin_url="$(git remote get-url origin)"

@@ -32,6 +32,9 @@ dev = [
 [project.scripts]
 dora-openarm-quitter = "dora_openarm_quitter.main:main"
 
+[project.urls]
+Repository = "https://github.com/enactic/dora-openarm-quitter"
+
 [tool.ruff.lint]
 extend-select = [
   "D",   # pydocstyle
