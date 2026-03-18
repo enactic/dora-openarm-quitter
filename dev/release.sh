@@ -16,10 +16,9 @@
 
 set -eu
 
-if [ $# -lt 1 ]; then
-  echo "Usage: $0 version [display_name]"
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 version"
   echo " e.g.: $0 1.0.0"
-  echo " e.g.: $0 1.0.0 'OpenArm KER'"
   exit 0
 fi
 
@@ -36,7 +35,7 @@ with open("pyproject.toml", "rb") as f:
   print(tomllib.load(f)["project"]["urls"]["Repository"].split("/")[-1])
 PY
 )
-display_name="${2:-${repository_name}}"
+project_name="$(sed -n '1s/^#* *//p' README.md)"
 
 if [ "${RELEASE_CHECK_ORIGIN:-yes}" = "yes" ]; then
   git_origin_url="$(git remote get-url origin)"
@@ -64,6 +63,6 @@ fi
 
 if [ "${RELEASE_TAG:-yes}" = "yes" ]; then
   echo "Tag"
-  git tag -a -m "${display_name} ${version}" "${version}"
+  git tag -a -m "${project_name} ${version}" "${version}"
   git push origin "${version}"
 fi
