@@ -28,10 +28,19 @@ base_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.."
 
 cd "${base_dir}"
 
+repository_name=$(
+  python3 <<PY
+import tomllib
+with open("pyproject.toml", "rb") as f:
+  print(tomllib.load(f)["project"]["urls"]["Repository"].split("/")[-1])
+PY
+)
+project_name="$(sed -n '1s/^# //p' README.md)"
+
 if [ "${RELEASE_CHECK_ORIGIN:-yes}" = "yes" ]; then
   git_origin_url="$(git remote get-url origin)"
-  if [ "${git_origin_url}" != "git@github.com:enactic/dora-openarm-quitter.git" ]; then
-    echo "This script must be ran with working copy of enactic/dora-openarm-quitter."
+  if [ "${git_origin_url}" != "git@github.com:enactic/${repository_name}.git" ]; then
+    echo "This script must be ran with working copy of enactic/${repository_name}."
     echo "The origin's URL: ${git_origin_url}"
     exit 1
   fi
@@ -54,6 +63,6 @@ fi
 
 if [ "${RELEASE_TAG:-yes}" = "yes" ]; then
   echo "Tag"
-  git tag -a -m "dora-openarm-quitter ${version}" "${version}"
+  git tag -a -m "${project_name} ${version}" "${version}"
   git push origin "${version}"
 fi
