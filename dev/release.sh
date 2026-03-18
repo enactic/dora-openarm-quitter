@@ -35,7 +35,7 @@ with open("pyproject.toml", "rb") as f:
   print(tomllib.load(f)["project"]["urls"]["Repository"].split("/")[-1])
 PY
 )
-project_name="$(sed -n '1s/^#* *//p' README.md)"
+project_name="$(sed -n '1s/^# //p' README.md)"
 
 if [ "${RELEASE_CHECK_ORIGIN:-yes}" = "yes" ]; then
   git_origin_url="$(git remote get-url origin)"
