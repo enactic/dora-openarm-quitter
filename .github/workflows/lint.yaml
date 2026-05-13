@@ -15,9 +15,8 @@
 name: Lint
 on:
   push:
-    branches:
-      - '!copilot/**'
-      - '**'
+    branches-ignore:
+      - copilot/**
   pull_request:
 concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
