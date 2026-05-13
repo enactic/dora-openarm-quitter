@@ -1,4 +1,4 @@
 # Pull request description requirements
 
-- The first line of every pull request description must be `Fix GH-${ISSUE_NUMBER}` with `${ISSUE_NUMBER}` replaced by the linked issue number.
+- Every pull request description must start with `Fix GH-${ISSUE_NUMBER}` on the first line, and `${ISSUE_NUMBER}` must be replaced by the linked issue number.
 - Do not include a generic or meaningless `Changes` section in pull request descriptions.
