@@ -16,8 +16,8 @@ name: Lint
 on:
   push:
     branches:
-      - '**'
       - '!copilot/**'
+      - '**'
   pull_request:
 concurrency:
   group: ${{ github.head_ref || github.sha }}-${{ github.workflow }}
