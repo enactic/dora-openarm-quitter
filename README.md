@@ -12,7 +12,7 @@ See also [enactic/dora-openarm-data-collection](github.com/enactic/dora-openarm-
 
 | Input ID | Type | Description |
 | --- | --- | --- |
-| `command` | Arrow array where first value is a string | If the first value is `"quit"`, the node exits. Any other `command` value is ignored. |
+| `command` | Arrow array where first value is a string | If the first value is `"quit"`, the node quit. Any other `command` value is ignored. |
 | any other input ID | Any Arrow value | The input is forwarded to an output with the same ID and metadata. |
 
 ### Outputs
